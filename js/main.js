@@ -1,15 +1,20 @@
+
+//Função fazGet que recebe a URL do Get
 function fazGet(url) {
-    let request = new XMLHttpRequest()
-    request.open("GET", url, false)
-    request.send()
-    return request.responseText
+    let request = new XMLHttpRequest()   // Faz a requisição da URL
+    request.open("GET", url, false)      // Método GET, URL, False
+    request.send()                       // Nesse caso não mandamos nada pro servidor ()
+    return request.responseText          // Retornamos responseText
 }
 
+//Função criaLinha que recebe o queue (fila de espera)
 function criaLinha(queue) {
     console.log(queue)
-    linha = document.createElement("tr");
 
-    tdid = document.createElement("td");
+    // Vamos então criar essas linhas
+    linha = document.createElement("tr");    // A linha
+
+    tdid = document.createElement("td");     // AS colunas para os 9 campos do registro
     tdbirth = document.createElement("td");
     tdname = document.createElement("td");
     tdgender = document.createElement("td");
@@ -19,7 +24,7 @@ function criaLinha(queue) {
     tdcity = document.createElement("td"); 
     tdcep = document.createElement("td");   
 
-    tdid.innerHTML = queue.id
+    tdid.innerHTML = queue.id                // Botamos os dados nessas colunas
     tdbirth.innerHTML = queue.birth
     tdname.innerHTML = queue.name
     tdgender.innerHTML = queue.gender
@@ -29,7 +34,7 @@ function criaLinha(queue) {
     tdcity.innerHTML = queue.city
     tdcep.innerHTML = queue.cep
 
-    linha.appendChild(tdid);
+    linha.appendChild(tdid);                // Acrescentamos na linha como filhos dela todos os 9 campos
     linha.appendChild(tdbirth);
     linha.appendChild(tdname);
     linha.appendChild(tdgender);
@@ -40,20 +45,24 @@ function criaLinha(queue) {
     linha.appendChild(tdcep);
 
 
-    return linha;
+    return linha;                     // Retornamos o conteudo da linha para a nossa tabela
 }
-
+//Função main (Principal)
 function main() {
-    let data = fazGet("https://my-json-server.typicode.com/oslieroliveira/api-queue-organization/queue");
-    let queue = JSON.parse(data);
+    // Chamamos o fazGet
+    // passamos a URL da API (BACK END)
+    // A resposta vem como uma string. Preciso passar como Json (objeto javascript), por isso jogo na variável "data"
+    // e depois uso o json.parse e passo a variável "data" e recebo como objeto javascript na variável "queue"
+    let data = fazGet("https://my-json-server.typicode.com/oslieroliveira/api-queue-organization/queue"); 
+    let queue = JSON.parse(data);         
+    
+    // Agora que temos os dados, precisamos mostrar na tela do usuário
+    // Para cada pessoa da fila, (registro), criar uma linha    
     let tabela = document.getElementById("tabela");
-    queue.forEach(element => {
+    queue.forEach(element => {                  // forEach (faz o loop para cada registro encontrado e acrescenta na tabela)
         let linha = criaLinha(element);
         tabela.appendChild(linha);
     });
-    // Para cada pessoa da fila
-        // criar uma linha
-        // adicionar na tabela
 }
 
 main()
