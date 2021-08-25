@@ -15,7 +15,9 @@ function criaLinha(queue) {
     tdgender = document.createElement("td");
     tdemail = document.createElement("td");    
     tdphone = document.createElement("td"); 
-    tdaddress = document.createElement("td");   
+    tdaddress = document.createElement("td"); 
+    tdcity = document.createElement("td"); 
+    tdcep = document.createElement("td");   
 
     tdid.innerHTML = queue.id
     tdbirth.innerHTML = queue.birth
@@ -24,6 +26,8 @@ function criaLinha(queue) {
     tdemail.innerHTML = queue.email
     tdphone.innerHTML = queue.phone
     tdaddress.innerHTML = queue.address
+    tdcity.innerHTML = queue.city
+    tdcep.innerHTML = queue.cep
 
     linha.appendChild(tdid);
     linha.appendChild(tdbirth);
@@ -32,6 +36,8 @@ function criaLinha(queue) {
     linha.appendChild(tdemail);
     linha.appendChild(tdphone);
     linha.appendChild(tdaddress);
+    linha.appendChild(tdcity);
+    linha.appendChild(tdcep);
 
 
     return linha;
