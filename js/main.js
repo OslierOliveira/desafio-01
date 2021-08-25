@@ -8,16 +8,25 @@ function fazGet(url) {
 function criaLinha(queue) {
     console.log(queue)
     linha = document.createElement("tr");
+
     tdid = document.createElement("td");
     tdbirth = document.createElement("td");
     tdname = document.createElement("td");
+    tdgender = document.createElement("td");
+    tdemail = document.createElement("td");
+
     tdid.innerHTML = queue.id
     tdbirth.innerHTML = queue.birth
     tdname.innerHTML = queue.name
+    tdgender.innerHTML = queue.gender
+    tdemail.innerHTML = queue.email
 
     linha.appendChild(tdid);
     linha.appendChild(tdbirth);
     linha.appendChild(tdname);
+    linha.appendChild(tdgender);
+    linha.appendChild(tdemail);
+
 
     return linha;
 }
