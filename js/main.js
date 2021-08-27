@@ -9,11 +9,12 @@ function fazGet(url) {
 
 //Função criaLinha que recebe o queue (fila de espera)
 function criaLinha(queue) {
-    console.log(queue)
+    
+    // console.log(queue)
 
     // Vamos então criar essas linhas
     linha = document.createElement("tr");    // A linha
-
+  
     tdid = document.createElement("td");     // AS colunas para os 9 campos do registro
     tdbirth = document.createElement("td");
     tdname = document.createElement("td");
@@ -54,11 +55,31 @@ function main() {
     // A resposta vem como uma string. Preciso passar como Json (objeto javascript), por isso jogo na variável "data"
     // e depois uso o json.parse e passo a variável "data" e recebo como objeto javascript na variável "queue"
     let data = fazGet("https://my-json-server.typicode.com/oslieroliveira/api-queue-organization/queue"); 
-    let queue = JSON.parse(data);         
+    let queue = JSON.parse(data);   
+
+   // Para ordenar a Fila de espera por ordem de idade (mais velhos primeiros), usamos O método sort() do Array em JavaScript
+
+   // Ordenando objetos pela propriedade “date”
+
+   // Os dados da data de contratação de cada funcionário estão armazenados na propriedade hireDate, 
+   //   porém é apenas uma string que representa uma data, não é exatamente um objeto Date. Portanto,
+   //   para ordenar os funcionários por data de contratação, primeiro é necessário criar um objeto Date
+   //   válido a partir da string hireDate e só então comparar as datas.
+
+   // Abaixo, está a solução:
+
+    queue.sort(function(x, y) {
+        let a= new Date(x.birth);
+        let b= new Date(y.birth);
+
+        return a - b;
+    });
+     
+    console.log(queue) // verificando o resultado nesse momento após a ordenação por Nascimento (birth)
     
     // Agora que temos os dados, precisamos mostrar na tela do usuário
-    // Para cada pessoa da fila, (registro), criar uma linha    
-    let tabela = document.getElementById("tabela");
+    // Para cada pessoa da fila, (registro), criar uma linha   
+        let tabela = document.getElementById("tabela");
     queue.forEach(element => {                  // forEach (faz o loop para cada registro encontrado e acrescenta na tabela)
         let linha = criaLinha(element);
         tabela.appendChild(linha);
