@@ -1,5 +1,5 @@
 
-//Função fazGet que recebe a URL do Get
+//Função fazGet que recebe a URL do Get.
 function fazGet(url) {
     let request = new XMLHttpRequest()   // Faz a requisição da URL
     request.open("GET", url, false)      // Método GET, URL, False
